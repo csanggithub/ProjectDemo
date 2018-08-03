@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjectDemo.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="T:ProjectDemo.WebAPI.FromUriOrBodyAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.FromUriOrBodyAttribute.GetBinding(System.Web.Http.Controllers.HttpParameterDescriptor)">
+            <summary>
+            
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.FromUriOrBodyAttribute.FromUriOrBodyParameterBinding">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.FromUriOrBodyAttribute.FromUriOrBodyParameterBinding.#ctor(System.Web.Http.Controllers.HttpParameterDescriptor)">
+            <summary>
+            
+            </summary>
+            <param name="desc"></param>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.FromUriOrBodyAttribute.FromUriOrBodyParameterBinding.ExecuteBindingAsync(System.Web.Http.Metadata.ModelMetadataProvider,System.Web.Http.Controllers.HttpActionContext,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="metadataProvider"></param>
+            <param name="actionContext"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.SwaggerConfig">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.SwaggerConfig.Register">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.CachingSwaggerProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.CachingSwaggerProvider.#ctor(Swashbuckle.Swagger.ISwaggerProvider)">
+            <summary>
+            
+            </summary>
+            <param name="swaggerProvider"></param>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.CachingSwaggerProvider.GetSwagger(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="rootUrl"></param>
+            <param name="apiVersion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.CachingSwaggerProvider.GetControllerDesc">
+            <summary>
+            从API文档中读取控制器描述
+            </summary>
+            <returns>所有控制器描述</returns>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.SwaggerCacheProvider">
+            <summary>
+            swagger显示控制器的描述
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.SwaggerCacheProvider.#ctor(Swashbuckle.Swagger.ISwaggerProvider,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="swaggerProvider"></param>
+            <param name="xml">xml文档路径</param>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.SwaggerCacheProvider.GetSwagger(System.String,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.SwaggerCacheProvider.GetControllerDesc">
+            <summary>
+            从API文档中读取控制器描述
+            </summary>
+            <returns>所有控制器描述</returns>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.TestAttribute">
+            <summary>
+            测试过滤器
+            </summary>
+        </member>
+        <member name="P:ProjectDemo.WebAPI.TestAttribute.IsCheck">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.TestAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">
+            <summary>
+            执行Action之后，执行该方法
+            </summary>
+            <param name="actionExecutedContext"></param>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.TestAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            执行Action之前，执行该方法
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.WeiXinHelper">
+            <summary>
+            WeiXinHelper
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.WeiXinHelper.RequestWinXinApi(System.String,System.String)">
+            <summary>
+            请求微信接口
+            </summary>
+            <param name="strUrl"></param>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.WeiXinHelper.CheckSgin(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sgin"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ProjectDemo.WebAPI.Controllers.WeiXinController">
+            <summary>
+            微信接口控制器
+            </summary>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.Controllers.WeiXinController.POSTWeiXinInterface(ProjectDemo.WebAPI.Models.RequestWeiXinVM)">
+            <summary>
+            微信接口
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ProjectDemo.WebAPI.Controllers.WeiXinController.GETWeiXinInterface(ProjectDemo.WebAPI.Models.RequestWeiXinVM)">
+            <summary>
+            微信接口
+            </summary>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ProjectDemo.WebAPI.Models.RequestWeiXinVM.RequestContent">
+            <summary>
+            请求微信的内容
+            </summary>
+        </member>
+        <member name="P:ProjectDemo.WebAPI.Models.RequestWeiXinVM.RequestMethod">
+            <summary>
+            请求方法 GET、POST
+            </summary>
+        </member>
+        <member name="P:ProjectDemo.WebAPI.Models.RequestWeiXinVM.Sign">
+            <summary>
+            签名
+            </summary>
+        </member>
+    </members>
+</doc>
