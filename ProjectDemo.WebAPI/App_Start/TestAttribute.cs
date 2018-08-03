@@ -13,7 +13,7 @@ namespace ProjectDemo.WebAPI
     public class TestAttribute: ActionFilterAttribute
     {
         /// <summary>
-        /// 
+        /// 是否启用校验
         /// </summary>
         public bool IsCheck { get; set; }
         /// <summary>
