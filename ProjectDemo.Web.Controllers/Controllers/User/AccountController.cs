@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace ProjectDemo.Web.Controllers.Controllers.User
 {
-    public class UserController: Controller
+    public class AccountController: Controller
     {
         [HttpGet]
         public ActionResult Login()

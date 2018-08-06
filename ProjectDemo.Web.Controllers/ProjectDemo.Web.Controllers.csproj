@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\LoginHelper.cs" />
     <Compile Include="Areas\Admin\AboutController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\HomeController.cs" />
@@ -55,11 +56,16 @@
     <Compile Include="Controllers\Test\GlobalRoutesTable.cs" />
     <Compile Include="Controllers\Test\HomeController.cs" />
     <Compile Include="Controllers\User\Models\LoginVM.cs" />
-    <Compile Include="Controllers\User\UserController.cs" />
+    <Compile Include="Controllers\User\AccountController.cs" />
     <Compile Include="Filter\AuthenticationAttribute.cs" />
     <Compile Include="Filter\TestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTool\CommonTool.csproj">
+      <Project>{1c31c815-8ac4-427c-bed7-a2ce5030ab5b}</Project>
+      <Name>CommonTool</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

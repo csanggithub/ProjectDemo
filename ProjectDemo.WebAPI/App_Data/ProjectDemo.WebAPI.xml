@@ -101,7 +101,7 @@
         </member>
         <member name="P:ProjectDemo.WebAPI.TestAttribute.IsCheck">
             <summary>
-            
+            是否启用校验
             </summary>
         </member>
         <member name="M:ProjectDemo.WebAPI.TestAttribute.OnActionExecuted(System.Web.Http.Filters.HttpActionExecutedContext)">

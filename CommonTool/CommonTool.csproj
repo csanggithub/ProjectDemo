@@ -30,13 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,14 +55,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CryptHelper\AESCrypt.cs" />
+    <Compile Include="CryptHelper\DESCrypt.cs" />
+    <Compile Include="CryptHelper\DESEncrypt.cs" />
+    <Compile Include="CryptHelper\HashCode.cs" />
+    <Compile Include="CryptHelper\RSACryption.cs" />
+    <Compile Include="JsonHelper\AjaxResult.cs" />
+    <Compile Include="JsonHelper\JsonConverter.cs" />
+    <Compile Include="JsonHelper\JsonHelper.cs" />
+    <Compile Include="JsonHelper\JsonSplit.cs" />
+    <Compile Include="Log4NetHelper\ExtLogImpl.cs" />
+    <Compile Include="Log4NetHelper\ExtLogManager.cs" />
+    <Compile Include="Log4NetHelper\IExtLog.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\Log4NetLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringHelper\ConvertHzToPz.cs" />
     <Compile Include="Utility\EnumHelper.cs" />
+    <Compile Include="Utility\EnumsClass.cs" />
+    <Compile Include="Utility\FileHelper.cs" />
     <Compile Include="Utility\HttpRequestHelper.cs" />
     <Compile Include="Utility\IPAddressHelper.cs" />
+    <Compile Include="Utility\ObjectConvertHelper.cs" />
+    <Compile Include="Utility\PageCollection.cs" />
+    <Compile Include="Utility\PredicateBuilder.cs" />
+    <Compile Include="Utility\RegexHelper.cs" />
     <Compile Include="Utility\RestApiClient.cs" />
+    <Compile Include="Utility\StringSafeFilter.cs" />
+    <Compile Include="Utility\Tools.cs" />
+    <Compile Include="Utility\Utils.cs" />
+    <Compile Include="Utility\ZipHelper.cs" />
+    <Compile Include="WebHelper\CookieHelper.cs" />
+    <Compile Include="WebHelper\SessionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

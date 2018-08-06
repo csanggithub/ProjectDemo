@@ -26,6 +26,7 @@ namespace ProjectDemo.Web.Controllers.Controllers.User.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public string Name { get; set; }
         /// <summary>
         /// 记住我RememberMe
         /// </summary>
