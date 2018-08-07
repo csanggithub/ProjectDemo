@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\IdentityService.cs" />
     <Compile Include="App_Start\LoginHelper.cs" />
     <Compile Include="Areas\Admin\AboutController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -52,12 +53,14 @@
     <Compile Include="Areas\Test\AboutController.cs" />
     <Compile Include="Areas\Test\HomeController.cs" />
     <Compile Include="Areas\Test\TestAreaRegistration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\Test\AboutController.cs" />
     <Compile Include="Controllers\Test\GlobalRoutesTable.cs" />
     <Compile Include="Controllers\Test\HomeController.cs" />
-    <Compile Include="Controllers\User\Models\LoginVM.cs" />
-    <Compile Include="Controllers\User\AccountController.cs" />
+    <Compile Include="Controllers\UserInfo\Models\LoginVM.cs" />
+    <Compile Include="Controllers\UserInfo\AccountController.cs" />
     <Compile Include="Filter\AuthenticationAttribute.cs" />
+    <Compile Include="Filter\AuthorizeFilterAttribute.cs" />
     <Compile Include="Filter\TestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,6 +68,10 @@
     <ProjectReference Include="..\CommonTool\CommonTool.csproj">
       <Project>{1c31c815-8ac4-427c-bed7-a2ce5030ab5b}</Project>
       <Name>CommonTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectDemo.Entity\ProjectDemo.Entity.csproj">
+      <Project>{8E9308BB-23F5-4FEC-BCA9-469EAACBAF70}</Project>
+      <Name>ProjectDemo.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

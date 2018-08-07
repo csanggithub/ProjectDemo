@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectDemo.Web.Controllers.Controllers.User.Models
+namespace ProjectDemo.Web.Controllers.Controllers.UserInfo.Models
 {
     public class LoginVM
     {

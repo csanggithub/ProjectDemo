@@ -114,7 +114,11 @@ namespace CommonTool
         /// <param name="strSessionName">Session对象名称</param>
         public static void Del(string strSessionName)
         {
-            HttpContext.Current.Session[strSessionName] = null;
+            if (HttpContext.Current != null
+                && HttpContext.Current.Session != null)
+            {
+                HttpContext.Current.Session[strSessionName] = null;
+            }
         }
         /// <summary>
         /// 移除Session

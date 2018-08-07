@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\Models\User.cs" />
     <Compile Include="WeiXin\Models\Users.cs" />
     <Compile Include="WeiXin\WeiXinDBContext.cs" />
   </ItemGroup>
