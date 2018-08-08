@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +102,27 @@ namespace ProjectDemo.Web.Controllers.App_Start
             //Log.Debug("系统用户鉴权", string.Format("当前用户{0}登录失效，已自动登录", account));
 
             return true;
+        }
+
+        /// <summary>
+        /// 是否允许在登录时使用验证码，默认为"True"
+        /// </summary>
+        public static bool IsAllowValidateCode
+        {
+            get
+            {
+                var allowValidateCode = true;
+                string strAllowvalidateCode = ConfigurationManager.AppSettings["AllowValidateCode"];
+                if (!string.IsNullOrEmpty(strAllowvalidateCode))
+                {
+                    if (strAllowvalidateCode.Equals("false", StringComparison.OrdinalIgnoreCase)
+                        || strAllowvalidateCode.Equals("0", StringComparison.OrdinalIgnoreCase))
+                    {
+                        allowValidateCode = false;
+                    }
+                }
+                return allowValidateCode;
+            }
         }
     }
 }

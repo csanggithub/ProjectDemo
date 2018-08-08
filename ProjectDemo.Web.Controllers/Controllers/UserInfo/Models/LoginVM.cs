@@ -18,13 +18,29 @@ namespace ProjectDemo.Web.Controllers.Controllers.UserInfo.Models
         public string UserName { get; set; }
 
         /// <summary>
-        /// 密码
+        /// 加密密码
+        /// </summary>
+        [Required(ErrorMessage = @"密码不能为空")]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// 明文密码
         /// </summary>
         [Required(ErrorMessage = "必填")]
         [Display(Name = "密码")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "{2}到{1}个字符")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string OriginalPassword { get; set; }
+
+        /// <summary>
+        /// 登录密钥
+        /// </summary>
+        public string LoginSecretKey { get; set; }
+
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public string ValidateCode { get; set; }
 
         public string Name { get; set; }
         /// <summary>

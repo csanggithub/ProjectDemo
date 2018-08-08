@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Models\Menu\SysMenuInfo.cs" />
+    <Compile Include="Domain\Models\Menu\SysRightOfMenu.cs" />
+    <Compile Include="Domain\Models\Menu\SysUserOfRight.cs" />
+    <Compile Include="Domain\Models\Role\SysRoleInfo.cs" />
+    <Compile Include="Domain\Models\Role\SysRoleOfRight.cs" />
+    <Compile Include="Domain\Models\Role\SysUserOfRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\Models\User.cs" />
     <Compile Include="WeiXin\Models\Users.cs" />
@@ -62,6 +68,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Maps\" />
+    <Folder Include="DTO\" />
+    <Folder Include="Enum\" />
+    <Folder Include="ForDispatchService\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

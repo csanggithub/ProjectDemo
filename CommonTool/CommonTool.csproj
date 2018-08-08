@@ -77,6 +77,7 @@
     <Compile Include="Utility\FileHelper.cs" />
     <Compile Include="Utility\HttpRequestHelper.cs" />
     <Compile Include="Utility\IPAddressHelper.cs" />
+    <Compile Include="Utility\JSDes.cs" />
     <Compile Include="Utility\ObjectConvertHelper.cs" />
     <Compile Include="Utility\PageCollection.cs" />
     <Compile Include="Utility\PredicateBuilder.cs" />
