@@ -10,7 +10,7 @@ using System.Net.Mime;
 
 namespace ProjectDemo.ConsoleApp.SendMail
 {
-    public class SendMail
+    public class SendMail: MailMessage
     {
         public SendMail() { }
 

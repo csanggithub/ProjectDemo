@@ -164,11 +164,20 @@ namespace CommonTool.MailKit
                 ContentTransferEncoding = ContentEncoding.Base64,
                 //FileName = fileName,
             };
+
+            //qq邮箱附件文件名中文乱码问题
             //https://www.cnblogs.com/rocketRobin/p/8337055.html
             //https://www.cnblogs.com/shanyou/p/4034298.html
             //var charset = "GB18030";
             attachment.ContentType.Parameters.Add(Encoding.Default, "name", fileName);
             attachment.ContentDisposition.Parameters.Add(Encoding.Default, "filename", fileName);
+
+            //处理文件名过长
+            foreach (var param in attachment.ContentDisposition.Parameters)
+                param.EncodingMethod = ParameterEncodingMethod.Rfc2047;
+            foreach (var param in attachment.ContentType.Parameters)
+                param.EncodingMethod = ParameterEncodingMethod.Rfc2047;
+
             return attachment;
         }
 

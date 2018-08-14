@@ -159,12 +159,12 @@ namespace CommonTool.MailKit
         public string MailEncoding { get; set; }
 
         /// <summary>
-        /// 发件人账号
+        /// 邮箱账号
         /// </summary>
         public string SenderAccount { get; set; }
 
         /// <summary>
-        /// 发件人密码
+        /// 邮箱密码
         /// </summary>
         public string SenderPassword { get; set; }
 
