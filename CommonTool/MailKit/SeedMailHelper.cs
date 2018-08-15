@@ -35,7 +35,7 @@ namespace CommonTool.MailKit
 
             var sendResultEntity = new SendResultEntity();
 
-            using (var client = new SmtpClient(new ProtocolLogger(CreateMailLog())))
+            using (var client = new SmtpClient(new ProtocolLogger(MailMessage.CreateMailLog())))
             {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
@@ -47,6 +47,10 @@ namespace CommonTool.MailKit
                 }
 
                 SmtpClientBaseMessage(client);
+
+                // Note: since we don't have an OAuth2 token, disable
+                // the XOAUTH2 authentication mechanism.
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
 
                 Authenticate(mailBodyEntity, sendServerConfiguration, client, sendResultEntity);
 
@@ -61,10 +65,8 @@ namespace CommonTool.MailKit
                 {
                     return sendResultEntity;
                 }
-
                 client.Disconnect(true);
             }
-
             return sendResultEntity;
         }
 
@@ -195,21 +197,6 @@ namespace CommonTool.MailKit
             };
 
             return mailServerInformation;
-        }
-
-        /// <summary>
-        /// 创建邮件日志文件
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateMailLog()
-        {
-            var logPath = AppDomain.CurrentDomain.BaseDirectory + "/DocumentLog/" +
-                Guid.NewGuid() + ".txt";
-
-            if (File.Exists(logPath)) return logPath;
-            var fs = File.Create(logPath);
-            fs.Close();
-            return logPath;
         }
     }
 }

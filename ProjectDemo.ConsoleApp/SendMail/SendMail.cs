@@ -30,26 +30,27 @@ namespace ProjectDemo.ConsoleApp.SendMail
             //string mailAddress = "1390193352@qq.com"; //替换成你的hotmail账户
             //string ToAddress = "907500395@163.com";//目标邮件地址。
 
-            SmtpClient smtp = new SmtpClient(host);
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = host;
             smtp.EnableSsl = true; //开启安全连接。
             smtp.Credentials = new NetworkCredential(user, password); //创建用户凭证
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network; //使用网络传送
-            MailMessage message = new MailMessage(mailAddress, ToAddress, "testmail", "testmail<a href='http://www.baidu.com'>123</a>");  //创建邮件
+            MailMessage message = new MailMessage();  //创建邮件
             ////邮件采用的编码
             message.BodyEncoding = Encoding.UTF8;
 
             ////设置邮件的优先级为高
             message.Priority = MailPriority.High;
-            //var SUpFile = HttpContext.Current.Server.MapPath("~/File/TIM截图20180807165402.png");//获得附件在本地地址
+            var SUpFile = HttpContext.Current.Server.MapPath("~/File/TIM截图20180807165402.png");//获得附件在本地地址
             //                                                    //将文件进行转换成Attachments
-            //Attachment data = new Attachment(SUpFile, MediaTypeNames.Application.Octet);
+            Attachment data = new Attachment(SUpFile, MediaTypeNames.Application.Octet);
             //// Add time stamp information for the file.
-            //ContentDisposition disposition = data.ContentDisposition;
-            //disposition.CreationDate = System.IO.File.GetCreationTime(SUpFile);
-            //disposition.ModificationDate = System.IO.File.GetLastWriteTime(SUpFile);
-            //disposition.ReadDate = System.IO.File.GetLastAccessTime(SUpFile);
+            ContentDisposition disposition = data.ContentDisposition;
+            disposition.CreationDate = System.IO.File.GetCreationTime(SUpFile);
+            disposition.ModificationDate = System.IO.File.GetLastWriteTime(SUpFile);
+            disposition.ReadDate = System.IO.File.GetLastAccessTime(SUpFile);
 
-            //message.Attachments.Add(data);
+            message.Attachments.Add(data);
             //System.Net.Mime.ContentType ctype = new System.Net.Mime.ContentType();
 
             message.From = new MailAddress(mailAddress, user, Encoding.UTF8);
@@ -67,7 +68,8 @@ namespace ProjectDemo.ConsoleApp.SendMail
             message.CC.Add("c@c.com");
             //message.Attachments.Add(new Attachment(new MemoryStream(fileAttachment.FileContent),
             //            fileAttachment.FileName));
-
+            message.Subject = "";
+            message.Body = "";
 
             smtp.EnableSsl = true;//经过ssl加密
             smtp.Send(message); //发送邮件
@@ -90,10 +92,9 @@ namespace ProjectDemo.ConsoleApp.SendMail
             int post = 465;
             string title = "标题";
             string content = "发送内容";
-            MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,
-                enableSsl, deliveryMethod, post, title, content);
+            //MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,enableSsl, deliveryMethod, post, title, content);
 
-            SennMail(mailModel);
+            //SennMail(mailModel);
         }
 
         //可以
@@ -110,10 +111,9 @@ namespace ProjectDemo.ConsoleApp.SendMail
             int post = 465;
             string title = "标题";
             string content = "发送内容";
-            MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,
-                enableSsl, deliveryMethod, post, title, content);
+            //MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,enableSsl, deliveryMethod, post, title, content);
 
-            SennMail(mailModel);
+            //SennMail(mailModel);
         }
 
         public static void SendQQ()
@@ -129,10 +129,9 @@ namespace ProjectDemo.ConsoleApp.SendMail
             int post = 465;
             string title = "标题";
             string content = "发送内容";
-            MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,
-                enableSsl, deliveryMethod, post, title, content);
+            //MailModel mailModel = new MailModel(user, password, host, mailAddress, toAddress,enableSsl, deliveryMethod, post, title, content);
 
-            SennMail(mailModel); ;
+            //SennMail(mailModel); ;
         }
 
         public static void SennMail(MailModel mailModel)

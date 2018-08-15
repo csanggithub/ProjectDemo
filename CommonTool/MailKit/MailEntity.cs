@@ -12,10 +12,10 @@ namespace CommonTool.MailKit
     /// </summary>
     public class MailBodyEntity
     {
-        /// <summary>
-        /// 邮件文本内容
-        /// </summary>
-        public string MailTextBody { get; set; }
+        ///// <summary>
+        ///// 邮件文本内容
+        ///// </summary>
+        //public string MailTextBody { get; set; }
 
         /// <summary>
         /// 邮件内容类型
@@ -57,10 +57,10 @@ namespace CommonTool.MailKit
         /// </summary>
         public string Subject { get; set; }
 
-        ///// <summary>
-        ///// 邮件内容
-        ///// </summary>
-        //public string Body { get; set; }
+        /// <summary>
+        /// 邮件内容
+        /// </summary>
+        public string Body { get; set; }
     }
 
     public class MailFile

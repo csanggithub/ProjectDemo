@@ -25,7 +25,6 @@ namespace CommonTool.MailKit
             {
                 throw new ArgumentNullException(nameof(mailBodyEntity));
             }
-
             var message = new MimeMessage();
 
             //设置邮件基本信息
@@ -34,15 +33,15 @@ namespace CommonTool.MailKit
             var multipart = new Multipart("mixed");
 
             //插入文本消息
-            if (!string.IsNullOrEmpty(mailBodyEntity.MailTextBody))
+            if (!string.IsNullOrEmpty(mailBodyEntity.Body))
             {
                 var alternative = new MultipartAlternative
                 {
-                    AssemblyMailTextMessage(mailBodyEntity.MailTextBody, mailBodyEntity.MailBodyType)
+                    AssemblyMailTextMessage(mailBodyEntity.Body, mailBodyEntity.MailBodyType)
                  };
-
                 multipart.Add(alternative);
             }
+
             //插入附件
             foreach (var mailFile in mailBodyEntity.MailFiles)
             {
@@ -50,10 +49,10 @@ namespace CommonTool.MailKit
                 {
                     var mimePart = AssemblyMailAttachmentMessage(mailFile.MailFileType, mailFile.MailFileSubType,
                          mailFile.MailFilePath);
-
                     multipart.Add(mimePart);
                 }
             }
+
             //组合邮件内容
             message.Body = multipart;
             return message;
@@ -71,7 +70,6 @@ namespace CommonTool.MailKit
             {
                 throw new ArgumentNullException();
             }
-
             if (mailBodyEntity == null)
             {
                 throw new ArgumentNullException();
@@ -88,7 +86,6 @@ namespace CommonTool.MailKit
                     minMessag.To.Add(new MailboxAddress(recipients));
                 }
             }
-
 
             //插入抄送人
             if (mailBodyEntity.Cc!=null&&mailBodyEntity.Cc.Any())
@@ -116,8 +113,8 @@ namespace CommonTool.MailKit
         /// <summary>
         /// 组装邮件文本信息
         /// </summary>
-        /// <param name="mailBody">邮件文本内容</param>
-        /// <param name="textPartType">邮件文本类型(plain,html,rtf,xml)</param>
+        /// <param name="mailBody">邮件内容</param>
+        /// <param name="textPartType">邮件类型(plain,html,rtf,xml)</param>
         /// <returns></returns>
         public static TextPart AssemblyMailTextMessage(string mailBody, TextFormat textPartType)
         {
@@ -125,11 +122,14 @@ namespace CommonTool.MailKit
             {
                 throw new ArgumentNullException();
             }
-            var textBody = new TextPart(textPartType)
-            {
-                Text = mailBody
-            };
+            //var textBody = new TextPart(textPartType)
+            //{
+            //    Text = mailBody,
+            //};
 
+            //处理查看源文件有乱码问题
+            var textBody = new TextPart(textPartType);
+            textBody.SetText(Encoding.Default, mailBody);
             return textBody;
         }
 
@@ -146,12 +146,10 @@ namespace CommonTool.MailKit
             {
                 throw new ArgumentNullException();
             }
-
             if (string.IsNullOrEmpty(fileAttachmentType))
             {
                 throw new ArgumentNullException();
             }
-
             if (string.IsNullOrEmpty(fileAttachmentPath))
             {
                 throw new ArgumentNullException();
@@ -166,8 +164,6 @@ namespace CommonTool.MailKit
             };
 
             //qq邮箱附件文件名中文乱码问题
-            //https://www.cnblogs.com/rocketRobin/p/8337055.html
-            //https://www.cnblogs.com/shanyou/p/4034298.html
             //var charset = "GB18030";
             attachment.ContentType.Parameters.Add(Encoding.Default, "name", fileName);
             attachment.ContentDisposition.Parameters.Add(Encoding.Default, "filename", fileName);
@@ -181,5 +177,20 @@ namespace CommonTool.MailKit
             return attachment;
         }
 
+        /// <summary>
+        /// 创建邮件日志文件
+        /// </summary>
+        /// <returns></returns>
+        public static string CreateMailLog()
+        {
+            var logPath = AppDomain.CurrentDomain.BaseDirectory + "/DocumentLog/" +
+                Guid.NewGuid() + ".txt";
+
+            if (File.Exists(logPath)) return logPath;
+            var fs = File.Create(logPath);
+            fs.Close();
+            return logPath;
+
+        }
     }
 }

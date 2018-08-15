@@ -17,7 +17,7 @@ namespace CommonTool.MailKit
     /// <summary>
     /// 跟投邮件服务API
     /// </summary>
-    public static class ReceiveEmailHelper
+    public static class ReceiveMailHelper
     {
         /// <summary>
         /// 设置发件人信息
@@ -37,7 +37,6 @@ namespace CommonTool.MailKit
             return sendServerConfiguration;
         }
 
-
         /// <summary>
         /// 接收邮件
         /// </summary>
@@ -50,7 +49,7 @@ namespace CommonTool.MailKit
                 throw new ArgumentNullException();
             }
 
-            using (var client = new ImapClient(new ProtocolLogger(CreateMailLog())))
+            using (var client = new ImapClient(new ProtocolLogger(MailMessage.CreateMailLog())))
             {
                 client.Connect(sendServerConfiguration.SmtpHost, sendServerConfiguration.SmtpPort,
                     SecureSocketOptions.SslOnConnect);
@@ -140,22 +139,6 @@ namespace CommonTool.MailKit
 
                 client.Disconnect(true);
             }
-        }
-
-        /// <summary>
-        /// 创建邮件日志文件
-        /// </summary>
-        /// <returns></returns>
-        public static string CreateMailLog()
-        {
-            var logPath = AppDomain.CurrentDomain.BaseDirectory + "/DocumentLog/" +
-                DateTime.Now.ToUniversalTime().ToString(CultureInfo.InvariantCulture) + ".txt";
-
-            if (File.Exists(logPath)) return logPath;
-            var fs = File.Create(logPath);
-            fs.Close();
-            return logPath;
-
         }
     }
 }
