@@ -2,8 +2,10 @@
 using ProjectDemo.ConsoleApp.SendMail;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -78,7 +80,7 @@ namespace ProjectDemo.ConsoleApp
                 //ReceiveEmailHelper.ReceiveEmail();
                 //ReceiveEmailHelper.DownloadBodyParts();
 
-                test3.SendMail(mailModel);
+
                 Console.WriteLine("成功！");
                 Console.ReadLine();
             }
@@ -87,5 +89,116 @@ namespace ProjectDemo.ConsoleApp
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        /// <summary>
+        /// 旧值还原.
+        /// </summary>
+        public void CoverModelField<T>(T model, List<TestHistory> changeRecordList, bool isUseNewVal = false) where T : class
+        {
+            PropertyInfo[] props = null;
+            try
+            {
+                var type = typeof(T);
+                props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            }
+            catch
+            { }
+
+            foreach (var p in props)
+            {
+                var record = changeRecordList.Where(x => x.FieldCode == p.Name).FirstOrDefault();
+                if (record != null)
+                {
+                    Type pt = p.PropertyType;
+
+                    //判断type类型是否为泛型，因为nullable是泛型类,
+                    if (pt.IsGenericType && pt.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))//判断convertsionType是否为nullable泛型类
+                    {
+                        //如果type为nullable类，声明一个NullableConverter类，该类提供从Nullable类到基础基元类型的转换
+                        NullableConverter nullableConverter = new NullableConverter(pt);
+                        //将type转换为nullable对的基础基元类型
+                        pt = nullableConverter.UnderlyingType;
+
+                        if (isUseNewVal)
+                        {
+                            if (record.NewValue == null)
+                            {
+                                p.SetValue(model, record.NewValue, null);
+                            }
+                            else
+                            {
+                                p.SetValue(model, Convert.ChangeType(record.NewValue, pt), null);
+                            }
+
+                        }
+                        else
+                        {
+                            if (record.OldValue == null)
+                            {
+                                p.SetValue(model, record.OldValue, null);
+                            }
+                            else
+                            {
+                                p.SetValue(model, Convert.ChangeType(record.OldValue, pt), null);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (isUseNewVal)
+                        {
+                            p.SetValue(model, Convert.ChangeType(record.NewValue, pt), null);
+                        }
+                        else
+                        {
+                            p.SetValue(model, Convert.ChangeType(record.OldValue, pt), null);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public class TestHistory
+    {
+        /// <summary>
+        /// 主键
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 数据变更记录主键
+        /// </summary>
+        public int DemoId { get; set; }
+
+        /// <summary>
+        /// 字段编码
+        /// </summary>
+        public string FieldCode { get; set; }
+
+        /// <summary>
+        /// 字段名称
+        /// </summary>
+        public string FieldName { get; set; }
+
+        /// <summary>
+        /// 旧值
+        /// </summary>
+        public string OldValue { get; set; }
+
+        /// <summary>
+        /// 新值
+        /// </summary>
+        public string NewValue { get; set; }
+
+        /// <summary>
+        /// 创建人ID
+        /// </summary>
+        public int CreateUserId { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
     }
 }
