@@ -134,6 +134,13 @@ namespace ProjectDemo.ConsoleApp
                                            : Convert.ChangeType(record.OldValue, pt), null);
                         }
                     }
+                    else if (pt.BaseType == typeof(Enum))
+                    {
+                        p.SetValue(model,
+                                   isUseNewVal
+                                       ? Enum.Parse(pt, record.NewValue)
+                                       : Enum.Parse(pt, record.OldValue), null);
+                    }
                     else
                     {
                         p.SetValue(model,
