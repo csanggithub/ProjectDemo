@@ -104,58 +104,44 @@ namespace ProjectDemo.ConsoleApp
             catch
             { }
 
-            foreach (var p in props)
-            {
-                var record = changeRecordList.Where(x => x.FieldCode == p.Name).FirstOrDefault();
-                if (record != null)
+            if (props != null)
+                foreach (var p in props)
                 {
-                    Type pt = p.PropertyType;
+                    var record = changeRecordList.Where(x => x.FieldCode == p.Name).FirstOrDefault();
+                    if (record == null) continue;
+                    var pt = p.PropertyType;
 
                     //判断type类型是否为泛型，因为nullable是泛型类,
                     if (pt.IsGenericType && pt.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))//判断convertsionType是否为nullable泛型类
                     {
                         //如果type为nullable类，声明一个NullableConverter类，该类提供从Nullable类到基础基元类型的转换
-                        NullableConverter nullableConverter = new NullableConverter(pt);
+                        var nullableConverter = new NullableConverter(pt);
                         //将type转换为nullable对的基础基元类型
                         pt = nullableConverter.UnderlyingType;
 
                         if (isUseNewVal)
                         {
-                            if (record.NewValue == null)
-                            {
-                                p.SetValue(model, record.NewValue, null);
-                            }
-                            else
-                            {
-                                p.SetValue(model, Convert.ChangeType(record.NewValue, pt), null);
-                            }
-
+                            p.SetValue(model,
+                                       record.NewValue == null
+                                           ? record.NewValue
+                                           : Convert.ChangeType(record.NewValue, pt), null);
                         }
                         else
                         {
-                            if (record.OldValue == null)
-                            {
-                                p.SetValue(model, record.OldValue, null);
-                            }
-                            else
-                            {
-                                p.SetValue(model, Convert.ChangeType(record.OldValue, pt), null);
-                            }
+                            p.SetValue(model,
+                                       record.OldValue == null
+                                           ? record.OldValue
+                                           : Convert.ChangeType(record.OldValue, pt), null);
                         }
                     }
                     else
                     {
-                        if (isUseNewVal)
-                        {
-                            p.SetValue(model, Convert.ChangeType(record.NewValue, pt), null);
-                        }
-                        else
-                        {
-                            p.SetValue(model, Convert.ChangeType(record.OldValue, pt), null);
-                        }
+                        p.SetValue(model,
+                                   isUseNewVal
+                                       ? Convert.ChangeType(record.NewValue, pt)
+                                       : Convert.ChangeType(record.OldValue, pt), null);
                     }
                 }
-            }
         }
     }
 
