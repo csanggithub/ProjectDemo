@@ -93,6 +93,7 @@
     <Compile Include="Utility\EnumHelper.cs" />
     <Compile Include="Utility\EnumsClass.cs" />
     <Compile Include="Utility\FileHelper.cs" />
+    <Compile Include="Utility\HelperUtility.cs" />
     <Compile Include="Utility\HttpRequestHelper.cs" />
     <Compile Include="Utility\IPAddressHelper.cs" />
     <Compile Include="Utility\JSDes.cs" />
